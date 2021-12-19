@@ -40,11 +40,6 @@ TEST(SharedPtr, Equal) {
   SharedPtr p(new int(10));
   SharedPtr p1 = p;
   EXPECT_EQ(*p, *p1);
-  EXPECT_EQ(p.use_count(), 2);
-  EXPECT_EQ(p1.use_count(), 2);
-  SharedPtr p2 = std::move(p);
-  EXPECT_EQ(*p2, 10);
-  EXPECT_EQ(p2.use_count(), 2);
 }
 
 TEST(SharedPtr, Bool) {
