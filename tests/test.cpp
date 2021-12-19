@@ -6,7 +6,7 @@
 TEST(SharedPtr, DefaultConstructor) {
   SharedPtr <int> p;
   EXPECT_EQ(p.get(), nullptr);
-  EXPECT_EQ(p.use_count(), 0);
+  EXPECT_EQ(p.get_counter(), nullptr);
 }
 
 TEST(SharedPtr, InitConstructor) {
