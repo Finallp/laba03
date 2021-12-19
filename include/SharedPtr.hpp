@@ -22,7 +22,7 @@ class SharedPtr {
   auto operator=(SharedPtr&& r) noexcept -> SharedPtr&;
 
   // проверяет, указывает ли указатель на объект
-  operator bool() const;
+  explicit operator bool() const;
   auto operator*() const -> T&;
   auto operator->() const -> T*;
 
@@ -67,14 +67,12 @@ SharedPtr<T>::SharedPtr(SharedPtr&& r) noexcept
 }
 
 template<typename T>
-SharedPtr<T>::~SharedPtr()
-{
+SharedPtr<T>::~SharedPtr(){
   if (_counter) {
     if ((*_counter) == 1) {
       delete _counter;
       delete _ptr;
-    }
-    else{
+    } else {
       (*_counter)--;
     }
   }
@@ -134,7 +132,7 @@ void SharedPtr<T>::reset(){
 
 template<typename T>
 void SharedPtr<T>::reset(T* ptr){
-  *this = std::move(SharedPtr(ptr));
+  *this = std::move(SharedPtr<T>(ptr));
 }
 
 template<typename T>
